@@ -1,16 +1,19 @@
 from fastapi import FastAPI
+from sqlalchemy import text
 
-from app.routers import cafes
+from app.core.database import engine
+from app.routers import cafes, auth
 
 app = FastAPI()
+
 app.include_router(cafes.router)
+app.include_router(auth.router)
+
 
 @app.get("/")
 def root():
     return {"status": "ok"}
 
-from app.core.database import engine
-from sqlalchemy import text
 
 @app.get("/db-check")
 def db_check():
