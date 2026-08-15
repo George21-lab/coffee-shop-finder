@@ -1,6 +1,9 @@
 from fastapi import FastAPI
 
+from app.routers import cafes
+
 app = FastAPI()
+app.include_router(cafes.router)
 
 @app.get("/")
 def root():
